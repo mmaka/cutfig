@@ -11,7 +11,7 @@ script:
   - qmake Tests/cutfig_tests/cutfig_tests.pro
   - g++ --version
   - make
-  - ./Tests/cutfig_tests/cutfig_test
+  - ./Tests/cutfig_tests/cutfig_tests
   - qmake cutfig/cutfig.pro
   - make
   - ./cutfig/cutfig
