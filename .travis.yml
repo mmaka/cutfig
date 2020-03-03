@@ -1,0 +1,14 @@
+# The Trusty beta Build Environment
+sudo: required
+dist: trusty
+
+install:
+  - sudo apt-get install -y qt5-default qttools5-dev-tools
+
+script:
+  - qmake Tests/cutfig_tests/cutfig_test.pro
+  - make
+  - ./Tests/cutfig_tests/cutfig_test
+  - qmake cutfig/cutfig.pro
+  - make
+  - ./cutfig/cutfig
