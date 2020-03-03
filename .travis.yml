@@ -6,7 +6,7 @@ install:
   - sudo apt-get install -y qt5-default qttools5-dev-tools
 
 script:
-  - qmake Tests/cutfig_tests/cutfig_test.pro
+  - qmake Tests/cutfig_tests/cutfig_tests.pro
   - make
   - ./Tests/cutfig_tests/cutfig_test
   - qmake cutfig/cutfig.pro
