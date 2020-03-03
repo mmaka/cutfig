@@ -8,10 +8,10 @@ install:
   - sudo apt-get install -y qt5-default qttools5-dev-tools
 
 script:
-  - qmake Tests/cutfig_tests/cutfig_tests.pro
-  - g++ --version
+  - mkdir build && cd build
+  - qmake ../Tests/cutfig_tests/cutfig_tests.pro
   - make
   - ./cutfig_tests
-  - qmake cutfig/cutfig.pro
+  - qmake ../cutfig/cutfig.pro
   - make
   - ./cutfig
