@@ -1,6 +1,6 @@
 # The Trusty beta Build Environment
 sudo: required
-dist: trusty
+dist: bionic
 language: cpp
 compiler: g++
 
