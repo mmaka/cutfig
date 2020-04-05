@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = cutfig
 TEMPLATE = app
-CONFIG += c++17
+CXXFLAGS += -std=c++1z -stdlib=libc++
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -25,11 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        cutfig.cpp
+        cutfig.cpp \
+    arrangement.cpp \
+    stencil.cpp \
+    occupancy.cpp \
+    rectangle.cpp
 
 HEADERS += \
         cutfig.h \
-    tools.h
+    tools.h \
+    arrangement.h \
+    rectangle.h \
+    figure.h \
+    point.h \
+    istencil.h \
+    stencil.h \
+    ioccupancy.h \
+    occupancy.h
 
 FORMS += \
         cutfig.ui

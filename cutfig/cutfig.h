@@ -12,7 +12,7 @@ class CutFig : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit CutFig(QWidget *parent = 0);
+    explicit CutFig(QWidget *parent = nullptr);
     ~CutFig();
 
 private:
