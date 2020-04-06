@@ -1,17 +1,22 @@
-# The Trusty beta Build Environment
-sudo: required
 dist: bionic
+sudo: false
 language: cpp
-compiler: g++
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-snapshot
+      - doxygen
 
 install:
-  - sudo apt-get install -y qt5-default qttools5-dev-tools
+  - pip install --user conan cmake
+
 
 script:
-  - mkdir build && cd build
-  - qmake ../Tests/cutfig_tests/cutfig_tests.pro
-  - make
-  - ./cutfig_tests
-  - qmake ../cutfig/cutfig.pro
-  - make
- # - ./cutfig
+  - CXX=/usr/bin/gcc-10 CC=/usr/bin/g++-10 cmake -D ENABLE_COVERAGE:BOOL=TRUE . 
+  - cmake --build . -- -j2 
+  - ctest -j2
+  - bash <(curl -s https://codecov.io/bash) -x /usr/bin/gcov-5
+
