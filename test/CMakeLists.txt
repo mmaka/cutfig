@@ -20,7 +20,7 @@ target_link_libraries(tests PRIVATE project_warnings project_options
 catch_discover_tests(
   tests
   TEST_PREFIX
-  "unittests."
+  "cutfig."
   EXTRA_ARGS
   -s
   --reporter=xml
