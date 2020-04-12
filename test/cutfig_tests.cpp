@@ -4,7 +4,6 @@
 
 TEST_CASE("Number of returned vectors", "[number]")
 {
-  /*
     size_t numberOfIndividuals {6};
     size_t numberOfIterations {1};
     size_t numberOfPopulations {1};
@@ -20,8 +19,7 @@ TEST_CASE("Number of returned vectors", "[number]")
     v.push_back(std::make_unique<Rectangle>(60, 20));
     cutfig.addInputFigures(std::move(v));
     std::vector<Arrangement> final = cutfig.geneticComputations();
-    REQUIRE(final.size() == 1);*/
-    REQUIRE(1 == 1);
+    REQUIRE(final.size() == 1);
 }
 /*
 TEST_CASE("Position of arranged rectanlge", "[positions]")
