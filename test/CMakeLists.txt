@@ -9,8 +9,8 @@ endif()
 add_library(catch_main STATIC catch_main.cpp)
 target_link_libraries(catch_main PUBLIC CONAN_PKG::catch2)
 
-add_executable(tests cutfig_tests.cpp ../src/arrangement.cpp ../src/stencil.cpp ../src/rectangle.cpp ../src/occupancy.cpp ../src/point.cpp ../src/cutfig.cpp)
-target_link_libraries(tests PRIVATE project_warnings project_options
+add_executable(cutfig_tests cutfig_tests.cpp ../src/arrangement.cpp ../src/stencil.cpp ../src/rectangle.cpp ../src/occupancy.cpp ../src/point.cpp ../src/cutfig.cpp)
+target_link_libraries(cutfig_tests PRIVATE project_warnings project_options
                                     catch_main)
 
 
@@ -18,7 +18,7 @@ target_link_libraries(tests PRIVATE project_warnings project_options
 # can modify the unittests. TEST_PREFIX to whatever you want, or use different
 # for different binaries
 catch_discover_tests(
-  tests
+  cutfig_tests
   TEST_PREFIX
   "cutfig."
   EXTRA_ARGS
