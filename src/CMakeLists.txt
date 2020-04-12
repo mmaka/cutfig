@@ -5,6 +5,6 @@ if(CUTFIG_USE_NANA)
 	add_subdirectory(nana)
 endif()
 
-add_executable(cutfig main.cpp arrangement.cpp occupancy.cpp rectangle.cpp stencil.cpp)
+add_executable(cutfig main.cpp arrangement.cpp occupancy.cpp rectangle.cpp stencil.cpp point.cpp)
 target_link_libraries(
 	cutfig PRIVATE project_options project_warnings CONAN_PKG::docopt.cpp CONAN_PKG::fmt CONAN_PKG::spdlog)

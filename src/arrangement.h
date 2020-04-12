@@ -19,6 +19,7 @@ public:
     }
     void generate(const std::vector<size_t> &indices, const std::vector<std::unique_ptr<IFigure>> &figures);
     void printPosition() const;
+    Point& getPositionAtIndex(size_t index);
 private:
     std::vector<PointFigureStencil> positions;
     void addFigure(const std::unique_ptr<IFigure> &figure);
