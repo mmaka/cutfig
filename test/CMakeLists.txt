@@ -24,7 +24,7 @@ catch_discover_tests(
   EXTRA_ARGS
   -s
   --reporter=xml
-  --out=tests.xml)
+--out=cutfig.xml)
 
 # Add a file containing a set of constexpr tests
 add_executable(constexpr_tests constexpr_tests.cpp)
