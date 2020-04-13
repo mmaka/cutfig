@@ -7,6 +7,6 @@ size_t Rectangle::getWidth() const {return width;}
 std::string Rectangle::print() const
 {
     std::stringstream ss;
-    ss << "("<<width << ", " << height << ")\n";
+    ss << "("<<width << ", " << height << ")";
     return ss.str();
 }

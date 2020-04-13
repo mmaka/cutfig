@@ -21,7 +21,7 @@ TEST_CASE("Number of returned vectors", "[number]")
     std::vector<Arrangement> final = cutfig.geneticComputations();
     REQUIRE(final.size() == 1);
 }
-/*
+
 TEST_CASE("Position of arranged rectanlge", "[positions]")
 {
   size_t numberOfIndividuals {1};
@@ -37,4 +37,3 @@ TEST_CASE("Position of arranged rectanlge", "[positions]")
   std::vector<Arrangement> final = cutfig.geneticComputations();
   REQUIRE(final[0].getPositionAtIndex(0).print() == "(89, 180)");
 }
-*/

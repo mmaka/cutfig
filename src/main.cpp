@@ -1,4 +1,5 @@
 #include "cutfig.h"
+#include<iostream>
 
 int main()
 {
@@ -16,7 +17,12 @@ int main()
     v.push_back(std::make_unique<Rectangle>(40, 20));
     v.push_back(std::make_unique<Rectangle>(50, 20));
     v.push_back(std::make_unique<Rectangle>(60, 20));
-    cutfig.addInputFigures(std::move(v));
+    try {
+      cutfig.addInputFigures(std::move(v));
+    } catch(const char* msg){
+      std::cerr << msg << '\n';
+      return 1;
+    }
     std::vector<Arrangement> final = cutfig.geneticComputations();
 
     for (auto &arr : final)
