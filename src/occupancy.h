@@ -5,19 +5,20 @@
 #include "ioccupancy.h"
 
 class Occupancy : public IOccupancy {
-    std::vector<size_t> occupancyX;
-    size_t width, height, space;
+    std::vector<int> occupancyX;
+    int width, height, space;
 public:
-    explicit Occupancy(size_t sizeX, size_t sizeY, size_t p_space): width {sizeX}, height{sizeY}, space{p_space} {
-        occupancyX = std::vector<size_t> (sizeX, sizeY);
+    explicit Occupancy(int sizeX, int sizeY, int p_space): width {sizeX}, height{sizeY}, space{p_space} {
+        occupancyX = std::vector<int> (static_cast<size_t>(sizeX), sizeY-1);
     }
     bool setPosition(Point &position, const std::unique_ptr<IFigure> &figure) override;
     virtual ~Occupancy() override;
 private:
-    size_t getMaxYForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const override;
-    size_t getMaxXForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const override;
+    int getMaxYForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const override;
+    int getMaxXForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const override;
     bool checkPosition(const Point &p, const std::unique_ptr<IFigure> &figure) const;
     void goMaxUp(Point& position, const std::unique_ptr<IFigure> &figure);
     void goMaxRight(Point &position, const std::unique_ptr<IFigure> &figure);
+    void updateOccupancyInfo(const Point &position, const std::unique_ptr<IFigure> &figure);
 };
 #endif // OCCUPANCY_H

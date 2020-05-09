@@ -1,35 +1,38 @@
 #include "occupancy.h"
+#include <iostream>
+#include<algorithm>
 
-size_t Occupancy::getMaxYForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const
+int Occupancy::getMaxYForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const
 {
-    auto startX = position.x;
-    auto endX = position.x + figure->getWidth();
-    auto maximalY = occupancyX[startX];
-    auto sizeOfOccupancyX= occupancyX.size();
+    int startX = position.x;
+    int endX = position.x + figure->getWidth();
+    int maximalY = occupancyX[static_cast<size_t>(startX)];
+    int sizeOfOccupancyX= static_cast<int>(occupancyX.size());
 
     if(endX != sizeOfOccupancyX-1) endX += space;
 
-    for(auto i = startX; i<endX; ++i)
+    for(size_t i = static_cast<size_t>(startX), end = static_cast<size_t>(endX); i<end; ++i)
         if(occupancyX[i] < maximalY) maximalY = occupancyX[i];
 
     if (maximalY != height) maximalY -= space;
 
-    return maximalY - figure->getHeight();
+    return maximalY - (figure->getHeight()-1);
 }
 
-size_t Occupancy::getMaxXForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const
+int Occupancy::getMaxXForFigure(const Point &position, const std::unique_ptr<IFigure> &figure) const
 {
-    auto maximalY = position.y + figure->getHeight();
-    size_t startX = 0;
+    int maximalY = position.y + figure->getHeight() - 1;
 
-    for(auto i = position.x; i< occupancyX.size(); ++i){
-        if(occupancyX[i] < maximalY) break;
-        startX = i;
+    int startX = 0;
+
+    for(size_t i = static_cast<size_t>(position.x), size = occupancyX.size(); i< size; ++i){
+        if(occupancyX[i] < maximalY)
+          break;
+        startX = static_cast<int>(i);
     }
-
     if(startX != width) startX -= space;
 
-    return startX - figure->getWidth();
+    return startX - (figure->getWidth() - 1);
 }
 
 bool Occupancy::checkPosition(const Point &position, const std::unique_ptr<IFigure> &figure) const
@@ -40,11 +43,10 @@ bool Occupancy::checkPosition(const Point &position, const std::unique_ptr<IFigu
 bool Occupancy::setPosition(Point &position, const std::unique_ptr<IFigure> &figure)
 {
     if (!checkPosition(position, figure)) return false;
-
     goMaxUp(position, figure);
     goMaxRight(position, figure);
     goMaxUp(position, figure);
-
+    updateOccupancyInfo(position, figure);
     //we can go up and right in loop -> todo
     return true;
 }
@@ -59,4 +61,9 @@ void Occupancy::goMaxRight(Point &position, const std::unique_ptr<IFigure> &figu
     position.x = getMaxXForFigure(position, figure);
 }
 
+void Occupancy::updateOccupancyInfo(const Point &position, const std::unique_ptr<IFigure> &figure){
+   auto start = occupancyX.begin() + position.x;
+   auto stop = occupancyX.begin() + position.x + figure->getWidth();
+   std::fill(start, stop, position.y);
+}
 Occupancy::~Occupancy(){}

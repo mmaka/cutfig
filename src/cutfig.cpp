@@ -1,6 +1,7 @@
 #include "cutfig.h"
 #include <iostream>
 #include <exception>
+#include <assert.h>
 
 Cutfig::Cutfig(const CutfigParams cutParams) : params{ cutParams } {}
 
@@ -41,11 +42,11 @@ void Cutfig::mutation(std::vector<std::vector<size_t>> &populations)
 void Cutfig::crossing(std::vector<std::vector<size_t>> &populations, std::vector<size_t> &bests)
 {
   std::vector<std::vector<size_t>> newPopulation;
-  auto populationSize = populations.size();
+  size_t populationSize = populations.size();
   newPopulation.reserve(populationSize);
-  auto bestsSize = bests.size();
+  size_t bestsSize = bests.size();
 
-  for (auto item : bests)
+  for (size_t item : bests)
     newPopulation.push_back(populations[item]);
 
   for (size_t i = bestsSize; i < populationSize; ++i) {
@@ -60,9 +61,9 @@ void Cutfig::crossing(std::vector<std::vector<size_t>> &populations, std::vector
 
 std::vector<size_t> Cutfig::mixingTwoPopulations(const std::vector<size_t> &population1, const std::vector<size_t> &population2)
 {
-  auto populationSize = population1.size();
-  auto numberOfElements = static_cast<size_t>(std::floor(populationSize / 2));
-  std::vector<size_t>::difference_type offset = static_cast<std::vector<size_t>::difference_type>(numberOfElements);
+  size_t populationSize = population1.size();
+  size_t numberOfElements = static_cast<size_t>(std::floor(populationSize / 2));
+  std::vector<int>::difference_type offset = static_cast<std::vector<size_t>::difference_type>(numberOfElements);
   std::vector<size_t> result;
   result.reserve(populationSize);
 
@@ -79,7 +80,7 @@ std::vector<size_t> Cutfig::chooseBestIndividuals(std::vector<Arrangement> &arra
   std::vector<std::tuple<size_t, int>> rated;
   rated.reserve(arrangement.size());
 
-  for (size_t i = 0; i < arrangement.size(); ++i)
+  for (size_t i = 0, size = arrangement.size(); i < size; ++i)
     rated[i] = std::tuple<size_t, int>(i, arrangement[i].stencilManager->rateStencils());
 
   std::sort(rated.begin(), rated.end(), [](const auto &t1, const auto &t2) { return std::get<1>(t1) > std::get<1>(t2); });
@@ -94,7 +95,7 @@ std::vector<size_t> Cutfig::chooseBestIndividuals(std::vector<Arrangement> &arra
 
 void Cutfig::generateArrangements(const std::vector<std::unique_ptr<IFigure>> &vectorOfIFigures, std::vector<std::vector<size_t>> &indexing, std::vector<Arrangement> &arrangements)
 {
-  for (size_t i = 0; i < indexing.size(); ++i) {
+  for (size_t i = 0, size = indexing.size(); i < size; ++i) {
     arrangements[i].generate(indexing[i], vectorOfIFigures);
   }
 }
@@ -121,7 +122,7 @@ std::vector<Arrangement> Cutfig::geneticComputations()
 
   for (size_t i = 0; i < params.numberOfIterations; ++i) {
     for (size_t j = 0; j < params.numberOfPopulations; ++j)
-      arrangements.emplace_back(0);
+      arrangements.emplace_back(params.stencilSizeX, params.stencilSizeY, params.stencilSpaceBetweenFigures);
 
     generateArrangements(figures, populations, arrangements);
     std::vector<size_t> bests = chooseBestIndividuals(arrangements, params.numberOfChoosen);

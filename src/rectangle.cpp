@@ -1,8 +1,8 @@
 #include "rectangle.h"
 #include <sstream>
 
-size_t Rectangle::getHeight() const {return height;}
-size_t Rectangle::getWidth() const {return width;}
+int Rectangle::getHeight() const {return height;}
+int Rectangle::getWidth() const {return width;}
 
 std::string Rectangle::print() const
 {

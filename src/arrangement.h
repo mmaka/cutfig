@@ -15,9 +15,9 @@ class Arrangement
 {
 public:
   std::unique_ptr<IStencilManager> stencilManager;
-  Arrangement(int space)
+  Arrangement(size_t size_x, size_t size_y, size_t space)
   {
-    stencilManager = std::make_unique<StencilManager>(100, 200, space);
+    stencilManager = std::make_unique<StencilManager>(size_x, size_y, space);
   }
   void generate(const std::vector<size_t> &indices, const std::vector<std::unique_ptr<IFigure>> &figures);
   void printPosition() const;

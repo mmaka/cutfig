@@ -1,20 +1,19 @@
 #include "stencil.h"
 #include "istencil.h"
+#include<iostream>
 
 PointFigureStencil StencilManager::addFigure(const std::unique_ptr<IFigure> &figure)
 {
     Point position {0, 0};
-    int stencilNo = 0;
+    size_t stencilNo = 0;
 
-    for (auto& stencil : stenciles){
-        if(!stencil->determinePosition(position, figure)){
-            if(stencilNo == static_cast<int>(stenciles.size()-1))
-                stenciles.push_back(std::make_unique<Stencil>(width, height, space));
-            ++stencilNo;
-        } else
-            break;
+    while (!stenciles[stencilNo]->determinePosition(position, figure)){
+       if(stencilNo == stenciles.size()-1)
+           stenciles.push_back(std::make_unique<Stencil>(width, height, space));
+       stencilNo++;
     }
-    return {std::move(position), stencilNo, figure};
+
+    return {std::move(position), static_cast<int>(stencilNo), figure};
 }
 
 int StencilManager::rateStencils() const

@@ -3,7 +3,7 @@
 
 void Arrangement::generate(const std::vector<size_t> &indices, const std::vector<std::unique_ptr<IFigure>> &figures)
 {
-  for (auto index : indices)
+  for (size_t index : indices)
     addFigure(figures[index]);
 }
 

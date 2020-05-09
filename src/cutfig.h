@@ -7,6 +7,9 @@ struct CutfigParams {
   size_t numberOfPopulations;
   size_t numberOfIndividualsToChoose;
   size_t numberOfChoosen;
+  size_t stencilSizeX;
+  size_t stencilSizeY;
+  size_t stencilSpaceBetweenFigures;
 };
 
 class ICutfig {

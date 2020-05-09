@@ -7,8 +7,8 @@
 #include "figure.h"
 
 struct Point {
-    size_t x, y; //>=0
-    Point(size_t a, size_t b) : x{a}, y{b} {}
+    int x, y; //>=0
+    Point(int a, int b) : x{a}, y{b} {}
     std::string print() const {
         std::stringstream ss;
         ss << "(" << x << ", " << y << ")";

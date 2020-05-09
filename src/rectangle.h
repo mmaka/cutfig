@@ -7,10 +7,10 @@
 class Rectangle : public IFigure
 {
 public:
-    size_t width, height;
-    explicit Rectangle(size_t sizeX, size_t sizeY): width{sizeX}, height{sizeY}{}
-    size_t getHeight() const override;
-    size_t getWidth() const override;
+    int width, height;
+    explicit Rectangle(int sizeX, int sizeY): width{sizeX}, height{sizeY}{}
+    int getHeight() const override;
+    int getWidth() const override;
     std::string print() const override;
     ~Rectangle() override = default;
 };
