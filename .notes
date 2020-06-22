@@ -1,1 +1,3 @@
--libX11-dev, libxft-dev (nana potrzebuje tego pakietu)
+requirements: 
+- cmake, conan (sudo pip3 install conan), ccache
+-libX11-dev, libxft-dev (nana needs that packages)

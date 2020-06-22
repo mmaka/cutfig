@@ -136,3 +136,11 @@ std::vector<Arrangement> Cutfig::geneticComputations()
   }
   return finalArrangements;
 }
+
+bool Cutfig::validateFigures(const std::vector<std::unique_ptr<IFigure>>& vectorOfIFigures){
+  for (auto& fig:vectorOfIFigures)
+    if (fig->getHeight() > static_cast<int>(params.stencilSizeY)|| fig->getWidth() > static_cast<int>(params.stencilSizeX))
+      return false;
+  
+  return true;
+}

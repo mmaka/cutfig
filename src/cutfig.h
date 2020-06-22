@@ -15,6 +15,7 @@ struct CutfigParams {
 class ICutfig {
 public:
   virtual void addInputFigures(std::vector<std::unique_ptr<IFigure>> vectorOfIFigures) = 0;
+  virtual bool validateFigures(const std::vector<std::unique_ptr<IFigure>>& vectorOfIFigures) = 0;
   virtual std::vector<Arrangement> geneticComputations() = 0;
   virtual ~ICutfig() = default;
 };
@@ -25,6 +26,7 @@ class Cutfig : public ICutfig {
 public:
   explicit Cutfig(const CutfigParams cutParams);
   void addInputFigures(std::vector<std::unique_ptr<IFigure>> vectorOfIFigures) override;
+  bool validateFigures(const std::vector<std::unique_ptr<IFigure>>& vectorOfIFigures) override;
   std::vector<Arrangement> geneticComputations() override;
   ~Cutfig();
 private:

@@ -18,11 +18,15 @@ int main()
     });
 
     std::vector<std::unique_ptr<IFigure>> v;
-    v.push_back(std::make_unique<Rectangle>(50, 20));
+    v.push_back(std::make_unique<Rectangle>(120, 20));
     v.push_back(std::make_unique<Rectangle>(50, 20));
     v.push_back(std::make_unique<Rectangle>(40, 10));
     try {
-      cutfig.addInputFigures(std::move(v));
+      if(cutfig.validateFigures(v))
+        cutfig.addInputFigures(std::move(v));
+      else
+        std::cerr << "The size of one of the figures exceeds the size of the stancil." << '\n';
+      return 1;
     } catch(const char* msg){
       std::cerr << msg << '\n';
       return 1;
