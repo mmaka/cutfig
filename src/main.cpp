@@ -18,21 +18,22 @@ int main()
     });
 
     std::vector<std::unique_ptr<IFigure>> v;
-    v.push_back(std::make_unique<Rectangle>(120, 20));
+    v.push_back(std::make_unique<Rectangle>(50, 20));
     v.push_back(std::make_unique<Rectangle>(50, 20));
     v.push_back(std::make_unique<Rectangle>(40, 10));
+
     try {
       if(cutfig.validateFigures(v))
         cutfig.addInputFigures(std::move(v));
-      else
+      else {
         std::cerr << "The size of one of the figures exceeds the size of the stancil." << '\n';
-      return 1;
+        return 1;
+      }
     } catch(const char* msg){
       std::cerr << msg << '\n';
       return 1;
     }
     std::vector<Arrangement> final = cutfig.geneticComputations();
-
     for (auto &arr : final)
         arr.printPosition();
 }
